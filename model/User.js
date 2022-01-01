@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     avatar: { type: String, required: true },
     location: { type: String, required: true },
     name: { type: String, required: true },
-    phone: { type: Number, required: true },
+    phone: { type: String, required: true },
     email: { type: String, required: true },
     profile: { type: ProfileSchema, required: true },
 });

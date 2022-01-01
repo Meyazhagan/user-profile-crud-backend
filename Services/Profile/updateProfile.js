@@ -1,34 +1,5 @@
-const { isValidObjectId } = require("mongoose");
-const User = require("../../model/User");
+const UpdateUserProfile = require("../User/UpdateUserProfile");
 
-module.exports = async ({ id, input }) => {
-    if (!isValidObjectId(id))
-        return {
-            ok: false,
-            user: null,
-            errors: [
-                {
-                    message: "Invalid User Id",
-                },
-            ],
-        };
-
-    const user = await User.findByIdAndUpdate(id, { $set: input }, { new: true });
-    if (!user)
-        return {
-            ok: false,
-            user: null,
-            errors: [
-                {
-                    message: "No User Found For Given Id",
-                },
-            ],
-        };
-
-    return {
-        ok: true,
-        user,
-        errors: [],
-        success: "Profile Updated",
-    };
+module.exports = async ({ userId, input }) => {
+    return await UpdateUserProfile({ userId, profile: input, successMsg: "Profile Updated" });
 };

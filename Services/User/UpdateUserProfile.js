@@ -1,8 +1,8 @@
 const { isValidObjectId } = require("mongoose");
 const User = require("../../model/User");
 
-module.exports = async ({ id }) => {
-    if (!isValidObjectId(id))
+module.exports = async ({ userId, profile, successMsg }) => {
+    if (!isValidObjectId(userId))
         return {
             ok: false,
             user: null,
@@ -13,7 +13,7 @@ module.exports = async ({ id }) => {
             ],
         };
 
-    const user = await User.findById(id);
+    const user = await User.findByIdAndUpdate(userId, { $set: { profile } }, { new: true });
     if (!user)
         return {
             ok: false,
@@ -29,5 +29,6 @@ module.exports = async ({ id }) => {
         ok: true,
         user,
         errors: [],
+        success: successMsg,
     };
 };

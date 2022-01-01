@@ -72,6 +72,7 @@ const schema = buildSchema(`
         createProfile(userId: ID, input:ProfileInput): UserResponse
         updateProfile(userId: ID, input: ProfileUpdateInput): UserResponse
         deleteProfile(userId: ID): UserResponse
+        initUser: UserResponse
     }
 
 `);

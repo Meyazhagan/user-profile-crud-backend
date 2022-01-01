@@ -3,6 +3,7 @@ const express = require("express");
 const schema = require("./GraphQL/schema");
 const { graphqlHTTP } = require("express-graphql");
 const resolver = require("./GraphQL/resolver");
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 
@@ -10,6 +11,8 @@ const startServer = async () => {
     const root = resolver;
 
     const app = express();
+
+    app.use(cors());
 
     app.use(
         "/graphql",
