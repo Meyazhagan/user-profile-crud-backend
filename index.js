@@ -7,12 +7,21 @@ const cors = require("cors");
 
 const mongoose = require("mongoose");
 
+const UserAccountRouter = require("./Routes/UserAccount");
+const authUserAccount = require("./Middleware/authUserAccount");
+
 const startServer = async () => {
     const root = resolver;
 
     const app = express();
 
+    app.use(express.json());
+
     app.use(cors());
+
+    app.use("/auth", UserAccountRouter);
+
+    app.use(authUserAccount);
 
     app.use(
         "/graphql",
